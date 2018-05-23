@@ -7,9 +7,9 @@ export default class DeckList extends Component {
     return (
       <View>
         {Object.keys(decks).map(deck => {
-          const { title, questions } = decks[deck];
+          const { title , questions } = decks[deck];
           return (
-            <View key={deck}>
+            <View key={title}>
               <Text>{title}</Text>
               <Text>{questions.length}</Text>
             </View>

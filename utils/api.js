@@ -1,3 +1,5 @@
+import { FlatList } from "react-native-gesture-handler";
+
 const initialData = {
   Geography: {
     title: "Geography",
@@ -33,4 +35,27 @@ const initialData = {
 
 export const getData = () => {
   return initialData;
+};
+
+export const getDecks = () => {
+  return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY).then(results => {
+    if (results == null) {
+      AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, initialData);
+      return initialData;
+    } else {
+      return JSON.parse(results);
+    }
+  });
+};
+
+export const saveDeckTitle = title => {
+  return AsyncStorage.getItem(
+    FLASHCARDS_STORAGE_KEY,
+    JSON.stringify({
+      [title]: { 
+        title: title,
+        questions: []
+      }
+    })
+  );
 };
